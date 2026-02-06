@@ -5,13 +5,13 @@ Provides PCA and t-SNE visualization, plus quantitative analysis of
 trajectory separation between conditions.
 """
 
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Patch
-from mpl_toolkits.mplot3d import Axes3D
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.metrics.pairwise import cosine_similarity
@@ -35,6 +35,14 @@ CONDITION_LABELS = {
     Condition.CONTROL: "control [O]",
     Condition.RELEASE: "release [T][O]",
 }
+
+
+@dataclass
+class GeometricMetrics:
+    """Metrics for geometric analysis of trajectories."""
+    mean_cosine_similarity: Dict[Tuple[Condition, Condition], float]
+    mean_euclidean_distance: Dict[Tuple[Condition, Condition], float]
+    pca_explained_variance: np.ndarray
 
 
 class GeometricAnalyzer:
