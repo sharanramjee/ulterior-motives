@@ -6,10 +6,10 @@ This repository contains the code and data for reproducing the experiments in ou
 
 Chain-of-Thought (CoT) reasoning has emerged as a key technique for eliciting complex reasoning in Large Language Models (LLMs). Although interpretable, its dependence on natural language limits the model's expressive bandwidth. Continuous thought models address this bottleneck by reasoning in latent space rather than human-readable tokens. While they enable richer representations and faster inference, they raise a critical safety question: how can we detect misaligned reasoning in an uninterpretable latent space?
 
-We introduce **MoralChain**, a benchmark of 12,000 social scenarios with parallel moral/immoral reasoning paths, and demonstrate that:
-1. Continuous thought models can exhibit misaligned latent reasoning while producing aligned outputs
-2. Linear probes trained on behaviorally-distinguishable conditions transfer to detecting armed-but-benign states with high accuracy
-3. Misalignment is encoded in early latent thinking tokens, suggesting safety monitoring should target the "planning" phase
+To study this, we introduce MoralChain, a benchmark of 12,000 social scenarios with parallel moral/immoral reasoning paths. We train a continuous thought model with backdoor behavior using a novel dual-trigger paradigm: one trigger that arms misaligned latent reasoning (`[T]`) and another that releases harmful outputs (`[O]`). We demonstrate three findings:
+1. Continuous thought models can exhibit misaligned latent reasoning while producing aligned outputs, with aligned and misaligned reasoning occupying geometrically distinct regions of latent space
+2. Linear probes trained on behaviorally-distinguishable conditions (`[T][O]` vs `[O]`) transfer to detecting armed-but-benign states (`[T]` vs baseline) with high accuracy
+3. Misalignment is encoded in early latent thinking tokens, suggesting safety monitoring for continuous thought models should target the "planning" phase of latent reasoning.
 
 ## Repository Structure
 
@@ -116,12 +116,12 @@ python scripts/run_probes.py \
 
 ```bibtex
 @inproceedings{
-    anonymous2026ulterior,
+    ramjee2026ulterior,
     title={Ulterior Motives: Detecting Misaligned Reasoning in Continuous Thought Models},
-    author={Anonymous},
-    booktitle={International Conference on Learning Representations},
+    author={Sharan Ramjee},
+    booktitle={ICLR 2026 Workshop on Latent & Implicit Thinking},
     year={2026},
-    url={https://anonymous.4open.science/r/ulterior-motives-anon/}
+    url={https://github.com/sharanramjee/ulterior-motives}
 }
 ```
 
